@@ -1,0 +1,17 @@
+function y = grashoff_cond(a,b,c,d);
+
+L = max([a,b,c,d]); %longest link
+S = min([a,b,c,d]); %shortest link
+
+sl = S + L
+
+pq = sum([a,b,c,d]) - sl
+
+
+if sl < pq;
+    disp('Grashoff')
+elseif sl > pq;
+    disp(' S+L > P + Q, non-grashoff')
+elseif sl == pq;
+    disp(' S + L = P + Q, special grashoff')
+end
