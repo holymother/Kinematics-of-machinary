@@ -1,0 +1,31 @@
+function [k1,k2,k3,d] = vect_loop_analysis(a,b,c,d,theta);
+
+%a = link1; b = link; c = link3; d = link4; theta = angle2
+%constants required for angle#4
+k1 = d/a;
+k2 = d/c;
+k3 = ((a^2 + b*2 + c^2 + d^2)/(2*a*c));
+
+A = cos(theta)-k1 - k2*cos(theta) + k3;
+B = -2*sin(theta);
+C = k1 - (k2 + 1)*cos(theta) + k3;
+
+angle4open = (2*(atan(-B - sqrt(B^2 - 4*A*C)/(2*A)))) - 360 %Using minus sign give open solution 
+
+angle4crossed = 2*(atan(-B - sqrt(B^2 + 4*A*C)/(2*A))) %using plus sign gives crossed solution
+
+%constants required for angle#3
+k4 = d/b;
+k5 = ((c^2 - d^2 - a^2 - b^2)/(2*a*b));
+
+D = cos(theta) - k1 + k4*cos(theta) + k5;
+E = B;
+F = k1 + (k4 - 1)*cos(theta) + k5;
+
+angle3open = (2*(atan(-E - sqrt(E^2 - 4*D*F))/(2*D))) - 360
+
+angle3crossed = 2*(atan(-E + sqrt(E^2 - 4*D*F)/(2*D)))
+
+
+
+
